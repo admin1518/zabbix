@@ -14,7 +14,7 @@ echo "dateline" > ${software}
 date_sys() {
 	yum -y install ntpdate
 	/usr/sbin/ntpdate cn.pool.ntp.org
-	[[ $(crontab -l | grep ntpdate | wc -l) -eq "0" ]] && echo "*/30 * * * * /usr/sbin/ntpdate cn.pool.ntp.org" >> /var/spool/cron/root
+	[ $(crontab -l | grep ntpdate | wc -l) -eq "0" ] && echo "*/30 * * * * /usr/sbin/ntpdate cn.pool.ntp.org" >> /var/spool/cron/root
 	service crond restart
 	[ $? -eq 0 ] && echo -e "\033[32m ntpdate installed \033[0m"
 }
@@ -52,7 +52,7 @@ fi
 sleep 1
 echo "创建zabbix用户"
 id zabbix
-[ $? -ne 0 ] && useradd -g 
+[ $? -ne 0 ] && useradd zabbix 
 sleep 3
 echo "设置数据库root密码,默认为123"
 sleep 3
